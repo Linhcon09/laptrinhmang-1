@@ -30,15 +30,18 @@ Giao tiếp giữa Server và Client:
 
 Client gửi: <SESSION_REQ>client123</SESSION_REQ>
 Server trả về: <SESSION_ACCEPTED>session987</SESSION_ACCEPTED>
+
 2 .Nhận video:
 
 Client gửi: <FRAME_REQ>session987</FRAME_REQ>
 Server gửi: <FRAME_DATA>session987|frame1|[data]</FRAME_DATA>
 Client gửi xác nhận: <FRAME_ACK>session987|frame1</FRAME_ACK>
+
 3. Dừng nhận video:
 
 Client gửi: <SESSION_END>session987</SESSION_END>
 Server ngừng phát video cho session này.
+
 4 .Kiểm tra trạng thái:
 
 Client gửi: <STATUS_REQ>session987</STATUS_REQ>
