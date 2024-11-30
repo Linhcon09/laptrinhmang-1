@@ -20,28 +20,29 @@ Video để ở máy phát (chạy chương trình phát video, các máy join v
 •	Sử dụng lại thư viện JavaCV để tạo lại video từ các đoạn nhỏ hoặc từ các khung hình.
 •	Dùng 1 thư viện Player trên JavaFX để hiển thị video bên máy nhận.
 2 Định nghĩa giao thức cho từng chức năng
+![image](https://github.com/user-attachments/assets/6a6feb31-07de-4ad3-b5f3-74226491ac51)
+
+![image](https://github.com/user-attachments/assets/0ef2cd48-45ae-42f6-bfc0-e3d98359e5c4)
 
 
-![image](https://github.com/user-attachments/assets/d3d4133f-b856-47eb-b5c0-90edf50901c0)
+Giao tiếp giữa Server và Client:
+1. Bắt đầu một phiên nhận video:
 
-Mô tả chi tiết từng chức năng:
-Khởi tạo phiên chat:
+Client gửi: <SESSION_REQ>client123</SESSION_REQ>
+Server trả về: <SESSION_ACCEPTED>session987</SESSION_ACCEPTED>
+2 .Nhận video:
 
-Client gửi <SESSION_REQ>clientID</SESSION_REQ> để yêu cầu khởi tạo.
-Server phản hồi với <SESSION_ACCEPTED>sessionID</SESSION_ACCEPTED> hoặc <SESSION_DENIED>.
-Gửi và nhận tin nhắn:
+Client gửi: <FRAME_REQ>session987</FRAME_REQ>
+Server gửi: <FRAME_DATA>session987|frame1|[data]</FRAME_DATA>
+Client gửi xác nhận: <FRAME_ACK>session987|frame1</FRAME_ACK>
+3. Dừng nhận video:
 
-Client gửi tin nhắn sử dụng <MESSAGE>.
-Server xác nhận tin nhắn đã nhận bằng <MESSAGE_ACK>.
-Thông báo trạng thái người dùng:
+Client gửi: <SESSION_END>session987</SESSION_END>
+Server ngừng phát video cho session này.
+4 .Kiểm tra trạng thái:
 
-Khi có người tham gia hoặc rời khỏi session, server gửi <USER_JOIN> hoặc <USER_LEAVE>.
-Heartbeat (Kiểm tra kết nối):
-
-Duy trì kết nối giữa client và server qua <HEARTBEAT> và <HEARTBEAT_ACK>.
-Kết thúc phiên chat:
-
-Client gửi <SESSION_END> khi muốn đóng phiên làm việc.
+Client gửi: <STATUS_REQ>session987</STATUS_REQ>
+Server trả: <STATUS_OK>session987|FPS:30|Resolution:1920x1080</STATUS_OK>
 Video minh họa
 
 
